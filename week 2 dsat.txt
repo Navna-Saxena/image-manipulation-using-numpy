@@ -1,0 +1,52 @@
+from skimage import io
+np_image = io.imread('PSIT kanpur.png')
+print(type(np_image),'\t',np_image.shape)
+import matplotlib.pyplot as plt
+plt.imshow(np_image)
+
+## flipping image ##
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+im = np.flipud(plt.imread('PSIT kanpur.png'))
+plt.subplot(2, 1, 1)
+plt.imshow(im)
+plt.subplot(2, 1, 2)
+plt.imshow(np.fliplr(im))
+plt.show()
+
+
+## displaying image ##
+
+import numpy as np
+import cv2
+import json
+from matplotlib import pyplot as plt
+from PIL import Image
+from IPython.display import display
+
+img=Image.open("PSIT kanpur.png")
+display(img)
+
+## inverting image ##
+
+im=np.array(img)
+print(im.shape)
+im
+
+mask= np.full(im.shape,255)
+mod_img = mask-im
+mod_img = mod_img.astype(np.uint8)
+display(Image.fromarray(mod_img))
+
+## greyscale image ##
+
+from PIL import Image
+img = Image.open('PSIT kanpur.png').convert('L')
+img.save('greyscale.png')
+
+from IPython.display import Image 
+pil_img = Image(filename='greyscale.png')
+display(pil_img)
+
