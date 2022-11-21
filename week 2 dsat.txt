@@ -1,0 +1,109 @@
+from skimage import io
+np_image = io.imread('PSIT kanpur.png')
+print(type(np_image),'\t',np_image.shape)
+import matplotlib.pyplot as plt
+plt.imshow(np_image)
+
+## flipping image ##
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+im = np.flipud(plt.imread('PSIT kanpur.png'))
+plt.subplot(2, 1, 1)
+plt.imshow(im)
+plt.subplot(2, 1, 2)
+plt.imshow(np.fliplr(im))
+plt.show()
+
+
+## displaying image ##
+
+import numpy as np
+import cv2
+import json
+from matplotlib import pyplot as plt
+from PIL import Image
+from IPython.display import display
+
+img=Image.open("PSIT kanpur.png")
+display(img)
+
+## inverting image ##
+
+im=np.array(img)
+print(im.shape)
+im
+
+mask= np.full(im.shape,255)
+mod_img = mask-im
+mod_img = mod_img.astype(np.uint8)
+display(Image.fromarray(mod_img))
+
+## greyscale image ##
+
+from PIL import Image
+img = Image.open('PSIT kanpur.png').convert('L')
+img.save('greyscale.png')
+
+from IPython.display import Image 
+pil_img = Image(filename='greyscale.png')
+display(pil_img)
+
+## For Vertical Flip ##
+
+from PIL import Image, ImageOps
+img = np.array(Image.open('PSIT kanpur.png'))  
+path = 'PSIT kanpur.png'
+pil_img = Image.fromarray(img)
+pil_img.save(path)
+degrees = 90                                
+img = np.array(Image.open('PSIT kanpur.png'))
+
+
+
+fig = plt.figure(figsize=(10, 10))
+fig.add_subplot(1, 2, 1)
+plt.imshow(img)
+plt.title("original")
+img0 = img.copy()
+for _ in range(degrees // 90):
+    img0 = img0.transpose(1, 0, 2)
+    for j in range(0, img0.shape[1] // 2):
+        c = img0[:, j, :].copy()
+        img0[:, j, :] = img0[: , img0.shape[1]-j-1, :]
+        img0[: , img0.shape[1]-j-1, :] = c
+fig.add_subplot(1, 2, 2)
+plt.imshow(img0)
+plt.title("rotated")
+
+plt.imshow(np.rot90(img))
+
+## Horizontal flip ##
+
+
+img = np.array(Image.open('PSIT kanpur.png'))
+fig = plt.figure(figsize=(10, 10))
+fig.add_subplot(1, 2, 1)              
+plt.imshow(np.flipud(img)) 
+fig.add_subplot(1, 2, 2)
+plt.imshow(np.fliplr(img))
+
+
+# Grayscale and Black & white image................................
+
+img = np.array(Image.open('PSIT kanpur.png'))
+img_grey = img.sum(2) / (255*3)
+img0 = img_grey.copy()
+img0 = np.pad(img0, ((100,100),(100,100)), mode='constant')
+plt.imshow(img0)
+
+fig = plt.figure(figsize=(10, 10))
+img_grey = 255*3 - img_grey        
+fig.add_subplot(1, 2, 1)
+plt.imshow(img_grey)
+plt.title('Grey image')
+img = 255 - img
+fig.add_subplot(1, 2, 2)
+plt.imshow(img)
+plt.title('Black And White image')
